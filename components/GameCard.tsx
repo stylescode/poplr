@@ -1,7 +1,9 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Link } from "expo-router";
 
 export function GameCard({ game }: { game: any }) {
   return (
+    <Link href={`${game.id}`} asChild>
     <Pressable style={styles.card}>
       <View style={styles.left}>
         <Text>Icon</Text>
@@ -12,6 +14,7 @@ export function GameCard({ game }: { game: any }) {
         <Text>Date</Text>
       </View>
     </Pressable>
+    </Link>
   );
 }
 

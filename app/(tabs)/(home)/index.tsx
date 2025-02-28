@@ -4,9 +4,9 @@ import { GameCard } from "@/components/GameCard";
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <GameCard game={{ title: "Game 1", description: "Description 1" }} />
-      <GameCard game={{ title: "Game 2", description: "Description 2" }} />
-      <GameCard game={{ title: "Game 3", description: "Description 3" }} />
+      <GameCard game={{ id: "gameOne", title: "Game 1", description: "Description 1" }} />
+      <GameCard game={{ id: "gameTwo", title: "Game 2", description: "Description 2" }} />
+      <GameCard game={{ id: "gameThree", title: "Game 3", description: "Description 3" }} />
     </View>
   );
 }
