@@ -1,14 +1,14 @@
-import { Text, TextInput, View } from 'react-native';
+import { View, Text } from 'react-native';
+import Connectr from '@/games/Connectr';
 
 export default function GameScreen() {
+
   return (
     <View>
       <Text>
-        game screen here
-        <TextInput
-          placeholder="Search"
-        />
+        Game one below
       </Text>
+      <Connectr />
     </View>
   )
 }
