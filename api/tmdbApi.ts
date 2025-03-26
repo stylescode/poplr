@@ -17,3 +17,13 @@ export const getMovies = async (query: string) => {
     throw error;
   }
 };
+
+export const getMovieCredits = async (movieId: number) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}&language=${LANGUAGE}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+    throw error;
+  }
+};
