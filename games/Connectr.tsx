@@ -1,6 +1,7 @@
 import { View, Text, TextInput } from 'react-native';
 import { useState } from 'react';
 import { getMovies } from '@/api/tmdbApi';
+import SearchResultDisplay from '@/components/SearchResultDisplay';
 
 export default function Connectr() {
 
@@ -17,6 +18,7 @@ export default function Connectr() {
         }}
       >
       </TextInput>
+      <SearchResultDisplay searchResults={movieResults} />
     </View>
   );
 }
