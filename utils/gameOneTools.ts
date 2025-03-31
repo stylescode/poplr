@@ -1,6 +1,7 @@
 
 export const findMatchingCastMembers = (castOne: any[], castTwo: any[]) => {
-  return castOne.filter((memberOne) =>
-    castTwo.some((memberTwo) => memberOne.id === memberTwo.id)
-  );
+  const castTwoIds = new Set(castTwo.map((member) => member.id));
+  return castOne
+    .filter((member) => castTwoIds.has(member.id))
+    .map((member) => member.name);
 };
