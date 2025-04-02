@@ -1,14 +1,14 @@
-import { View, Text } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import Connectr from '@/games/Connectr';
 
 export default function GameScreen() {
 
   return (
-    <View>
+    <ScrollView>
       <Text>
         Game one below
       </Text>
       <Connectr />
-    </View>
+    </ScrollView>
   )
 }
