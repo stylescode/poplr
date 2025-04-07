@@ -7,8 +7,6 @@ import GameOneMovieTile from '@/components/GameOneMovieTile';
 
 export default function Connectr() {
 
-  const [movieResults, setMovieResults] = useState([]);
-
   const [startingMovie, setStartingMovie] = useState(null);
   const [secondMovie, setSecondMovie] = useState(null);
   const [thirdMovie, setThirdMovie] = useState(null);
@@ -34,17 +32,7 @@ export default function Connectr() {
 
   return (
     <View>
-      {searching && (
-            <TextInput
-            placeholder="Search"
-            onChangeText={(text) => {
-              getMovies(text).then((movies) => {
-                setMovieResults(movies.results);
-              });
-            }}
-          >
-          </TextInput>
-      )}
+
       <TouchableOpacity>
         <GameOneMovieTile movieDetails={startingMovie} />
       </TouchableOpacity>
@@ -61,7 +49,7 @@ export default function Connectr() {
         <GameOneMovieTile movieDetails={endingMovie} />
       </TouchableOpacity>
 
-      <SearchResultDisplay searchResults={movieResults} />
+      <SearchResultDisplay searchStatus={searching}/>
     </View>
   );
 }
