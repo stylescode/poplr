@@ -33,7 +33,7 @@ export default function Connectr() {
     setActiveMovie(movieNum);
   };
 
-  const assignMovie = (movie) => {
+  const assignMovie = (movie: any) => {
     if (activeMovie === 2) {
       setSecondMovie(movie);
     } else if (activeMovie === 3) {
@@ -62,7 +62,6 @@ export default function Connectr() {
       </TouchableOpacity>
 
       <SearchComponent searchStatus={searching} assignMovie={assignMovie}/>
-
     </View>
   );
 }

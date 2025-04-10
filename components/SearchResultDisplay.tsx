@@ -11,7 +11,7 @@ export default function SearchComponent({ searchStatus, assignMovie }: SearchRes
 
   const [movieResults, setMovieResults] = useState<any[]>([]);
 
-  const handlePress = (movie) => {
+  const handlePress = (movie: any) => {
     assignMovie(movie);
   };
 
