@@ -1,9 +1,11 @@
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
 import { getMovies, getMovieDetails, getMovieCredits } from '@/api/tmdbApi';
-import SearchComponent from '@/components/SearchResultDisplay';
+import SearchComponent from '@/components/SearchComponent';
 import { findMatchingCastMembers } from '@/utils/gameOneTools';
 import GameOneMovieTile from '@/components/GameOneMovieTile';
+import { Sheet, YStack, Button } from 'tamagui';
+
 
 export default function Connectr() {
 
@@ -13,8 +15,7 @@ export default function Connectr() {
   const [fourthMovie, setFourthMovie] = useState(null);
   const [endingMovie, setEndingMovie] = useState(null);
 
-  const [activeMovie, setActiveMovie] = useState<Number>(0);
-
+  const [activeMovie, setActiveMovie] = useState<number>(0);
   const [searching, setSearching] = useState(false);
 
   useEffect(() => {
@@ -28,8 +29,8 @@ export default function Connectr() {
     );
   }, []);
 
-  const handlePress = (movieNum: Number) => {
-    setSearching(!searching);
+  const handlePress = (movieNum: number) => {
+    setSearching(true);
     setActiveMovie(movieNum);
   };
 
@@ -45,6 +46,7 @@ export default function Connectr() {
 
   return (
     <View>
+
       <TouchableOpacity>
         <GameOneMovieTile movieDetails={startingMovie} />
       </TouchableOpacity>
@@ -61,7 +63,16 @@ export default function Connectr() {
         <GameOneMovieTile movieDetails={endingMovie} />
       </TouchableOpacity>
 
-      <SearchComponent searchStatus={searching} assignMovie={assignMovie}/>
+      <Sheet open={searching} onOpenChange={setSearching} snapPoints={[90]} dismissOnSnapToBottom>
+        <Sheet.Overlay />
+        <Sheet.Handle />
+        <Sheet.Frame>
+          <YStack>
+            <SearchComponent assignMovie={assignMovie} setSearching={setSearching}/>
+          </YStack>
+        </Sheet.Frame>
+      </Sheet>
+
     </View>
   );
 }
