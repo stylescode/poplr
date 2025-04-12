@@ -63,8 +63,16 @@ export default function Connectr() {
         <GameOneMovieTile movieDetails={endingMovie} />
       </TouchableOpacity>
 
-      <Sheet open={searching} onOpenChange={setSearching} snapPoints={[90]} dismissOnSnapToBottom>
-        <Sheet.Overlay />
+      <Sheet
+        open={searching}
+        onOpenChange={setSearching}
+        snapPoints={[80]}
+        dismissOnSnapToBottom
+      >
+        <Sheet.Overlay
+          animation="lazy"
+          bg="$shadow2"
+        />
         <Sheet.Handle />
         <Sheet.Frame>
           <YStack>

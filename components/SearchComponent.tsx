@@ -1,4 +1,4 @@
-import { Pressable, View, Text, StyleSheet, Image, TextInput } from 'react-native';
+import { Pressable, View, Text, StyleSheet, Image, TextInput, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { getMovieCredits, getMovies } from '@/api/tmdbApi';
 import { YStack } from 'tamagui';
@@ -27,26 +27,29 @@ export default function SearchComponent({ assignMovie, setSearching }: SearchRes
         value={searchText}
         onChangeText={(text) => {
           setSearchText(text);
-          getMovies(searchText).then((movies) => {
+          getMovies(text).then((movies) => {
             setMovieResults(movies.results);
           });
         }}
       >
       </TextInput>
-      <View style={styles.movieResults}>
+      <ScrollView
+        horizontal
+        contentContainerStyle={styles.movieResults}
+        showsHorizontalScrollIndicator={true}>
         {movieResults && movieResults.map((result: any) => (
           <Pressable key={result.id} onPress={() => handlePress(result)}>
             <View style={styles.movieContainer}>
               <Image
                 source={{ uri: `https://image.tmdb.org/t/p/w500/${result.poster_path}` }}
-                style={{ width: 100, height: 150 }}
+                style={{ width: 160, height: 240 }}
               />
-              <Text>{result.title}</Text>
+              <Text style={styles.movieTitle}>{result.title}</Text>
               <Text>{result.release_date.slice(0, 4)}</Text>
             </View>
           </Pressable>
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -58,12 +61,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   movieResults: {
-    flexDirection: "row",
-  },
-  movieContainer: {
     borderColor: "blue",
     borderWidth: 1,
+    gap: 10,
+  },
+  movieContainer: {
+    alignItems: "center",
+    justifyContent: "space-between",
     borderRadius: 10,
-    width: 100
-  }
+    height: 300,
+    width: 160,
+  },
+  movieTitle: {
+    fontSize: 12,
+    fontWeight: "bold",
+  },
 });
