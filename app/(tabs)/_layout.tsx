@@ -1,4 +1,5 @@
 import { Tabs } from "expo-router";
+import { Play, User } from "lucide-react-native";
 
 export default function Layout() {
   return (
@@ -7,6 +8,10 @@ export default function Layout() {
         name="(home)"
         options={{
           headerShown: false,
+          tabBarIcon: ({}) => (
+            <Play color="black" />
+          ),
+          tabBarShowLabel: false,
           title: "Home"
         }}
       />
@@ -14,6 +19,10 @@ export default function Layout() {
         name="(profile)"
         options={{
           headerShown: false,
+          tabBarIcon: ({}) => (
+            <User color="black" />
+          ),
+          tabBarShowLabel: false,
           title: "Profile"
         }}
       />
