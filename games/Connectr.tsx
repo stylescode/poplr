@@ -1,11 +1,10 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Button, View, Text, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
-import { getMovies, getMovieDetails, getMovieCredits } from '@/api/tmdbApi';
+import { getMovieDetails, getMovieCredits } from '@/api/tmdbApi';
 import SearchComponent from '@/components/SearchComponent';
 import { findMatchingCastMembers } from '@/utils/gameOneTools';
 import GameOneMovieTile from '@/components/GameOneMovieTile';
-import { Sheet, YStack, Button } from 'tamagui';
-
+import { Sheet, YStack } from 'tamagui';
 
 export default function Connectr() {
 
@@ -17,6 +16,8 @@ export default function Connectr() {
 
   const [activeMovie, setActiveMovie] = useState<number>(0);
   const [searching, setSearching] = useState(false);
+
+  const [gameResult, setGameResult] = useState<string>("");
 
   useEffect(() => {
     getMovieDetails(70160).then((details) => {
@@ -42,6 +43,40 @@ export default function Connectr() {
     } else if (activeMovie === 4) {
       setFourthMovie(movie);
     }
+  }
+
+  const handleSubmit = async () => {
+    if (!startingMovie || !secondMovie || !thirdMovie || !fourthMovie || !endingMovie) {
+      return;
+    }
+
+    const startingMovieCredits = await getMovieCredits(startingMovie.id);
+    const secondMovieCredits = await getMovieCredits(secondMovie.id);
+    const thirdMovieCredits = await getMovieCredits(thirdMovie.id);
+    const fourthMovieCredits = await getMovieCredits(fourthMovie.id);
+    const endingMovieCredits = await getMovieCredits(endingMovie.id);
+
+    if (findMatchingCastMembers(startingMovieCredits.cast, secondMovieCredits.cast).length === 0) {
+      setGameResult("wrong");
+      return;
+    }
+
+    if (findMatchingCastMembers(secondMovieCredits.cast, thirdMovieCredits.cast).length === 0) {
+      setGameResult("wrong");
+      return;
+    }
+
+    if (findMatchingCastMembers(thirdMovieCredits.cast, fourthMovieCredits.cast).length === 0) {
+      setGameResult("wrong");
+      return;
+    }
+
+    if (findMatchingCastMembers(fourthMovieCredits.cast, endingMovieCredits.cast).length === 0) {
+      setGameResult("wrong");
+      return;
+    }
+
+    setGameResult("correct");
   }
 
   return (
@@ -80,6 +115,13 @@ export default function Connectr() {
           </YStack>
         </Sheet.Frame>
       </Sheet>
+
+      <Button
+        onPress={handleSubmit}
+        title="Submit"
+      />
+      {gameResult === "correct" && <Text>Correct!</Text>}
+      {gameResult === "wrong" && <Text>Wrong!</Text>}
 
     </View>
   );
