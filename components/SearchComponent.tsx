@@ -1,7 +1,6 @@
 import { Pressable, View, Text, StyleSheet, Image, TextInput, ScrollView } from 'react-native';
 import { useState } from 'react';
-import { getMovieCredits, getMovies } from '@/api/tmdbApi';
-import { YStack } from 'tamagui';
+import { getMovies } from '@/api/tmdbApi';
 
 interface SearchResultDisplayProps {
   assignMovie: Function;

@@ -1,11 +1,17 @@
-import { ScrollView, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Connectr from '@/games/Connectr';
 
 export default function GameScreen() {
 
   return (
-    <ScrollView>
+    <View style={styles.container}>
       <Connectr />
-    </ScrollView>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

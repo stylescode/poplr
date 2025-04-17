@@ -19,17 +19,18 @@ export default function GameOneMovieTile({ movieDetails }: { movieDetails: any }
     <View style={styles.container}>
       {movieDetails && (
         <View style={styles.movieContainer}>
-          <Text>{movieTitle}</Text>
-          <Text>{movieReleaseDate?.slice(0, 4)}</Text>
+          <Text style={styles.movieText}>{movieTitle}</Text>
+          <Text style={styles.movieText}>{movieReleaseDate?.slice(0, 4)}</Text>
           <Image
             source={{ uri: `https://image.tmdb.org/t/p/w500/${moviePosterPath}` }}
-            style={{ width: 100, height: 150 }}
+            style={StyleSheet.absoluteFillObject}
+            resizeMode='cover'
           />
         </View>
       )}
       {!movieDetails && (
         <View style={styles.fillerContainer}>
-          <Text>+</Text>
+          <Text style={styles.plusSign}>+</Text>
         </View>
       )}
     </View>
@@ -42,7 +43,8 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     borderRadius: 10,
     borderWidth: 1,
-    width: "90%",
+    flex: 1,
+    justifyContent: "center",
   },
   fillerContainer: {
     alignItems: "center",
@@ -50,6 +52,19 @@ const styles = StyleSheet.create({
   },
   movieContainer: {
     alignItems: "center",
+    borderRadius: 10,
     justifyContent: "center",
+    flex: 1,
+    width: "100%",
+  },
+  movieText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
+    zIndex: 1,
+  },
+  plusSign: {
+    fontSize: 30,
   }
 });

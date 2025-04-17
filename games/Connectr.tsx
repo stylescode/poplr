@@ -1,4 +1,4 @@
-import { Button, View, Text, TouchableOpacity } from 'react-native';
+import { Button, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
 import { getMovieDetails, getMovieCredits } from '@/api/tmdbApi';
 import SearchComponent from '@/components/SearchComponent';
@@ -80,21 +80,21 @@ export default function Connectr() {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
 
-      <TouchableOpacity>
+      <TouchableOpacity style={styles.movieTile}>
         <GameOneMovieTile movieDetails={startingMovie} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => handlePress(2)}>
+      <TouchableOpacity onPress={() => handlePress(2)} style={styles.movieTile}>
         <GameOneMovieTile movieDetails={secondMovie} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => handlePress(3)}>
+      <TouchableOpacity onPress={() => handlePress(3)} style={styles.movieTile}>
         <GameOneMovieTile movieDetails={thirdMovie} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => handlePress(4)}>
+      <TouchableOpacity onPress={() => handlePress(4)} style={styles.movieTile}>
         <GameOneMovieTile movieDetails={fourthMovie} />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity style={styles.movieTile}>
         <GameOneMovieTile movieDetails={endingMovie} />
       </TouchableOpacity>
 
@@ -126,3 +126,19 @@ export default function Connectr() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    borderColor: "blue",
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: "space-between",
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+  movieTile: {
+    width: "90%",
+    height: "16%",
+  }
+});
