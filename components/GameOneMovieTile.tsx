@@ -23,7 +23,7 @@ export default function GameOneMovieTile({ movieDetails }: { movieDetails: any }
           <Text style={styles.movieText}>{movieReleaseDate?.slice(0, 4)}</Text>
           <Image
             source={{ uri: `https://image.tmdb.org/t/p/w500/${moviePosterPath}` }}
-            style={StyleSheet.absoluteFillObject}
+            style={[StyleSheet.absoluteFillObject, { borderRadius: 10 }]}
             resizeMode='cover'
           />
         </View>
