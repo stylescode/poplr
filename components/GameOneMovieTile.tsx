@@ -20,12 +20,13 @@ export default function GameOneMovieTile({ movieDetails }: { movieDetails: any }
       {movieDetails && (
         <View style={styles.movieContainer}>
           <Text style={styles.movieText}>{movieTitle}</Text>
-          <Text style={styles.movieText}>{movieReleaseDate?.slice(0, 4)}</Text>
+          <Text style={styles.movieText}>({movieReleaseDate?.slice(0, 4)})</Text>
           <Image
             source={{ uri: `https://image.tmdb.org/t/p/w500/${moviePosterPath}` }}
             style={[StyleSheet.absoluteFillObject, { borderRadius: 10 }]}
             resizeMode='cover'
           />
+          <View style={styles.overlay} />
         </View>
       )}
       {!movieDetails && (
@@ -51,20 +52,26 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   movieContainer: {
-    alignItems: "center",
     borderRadius: 10,
     justifyContent: "center",
     flex: 1,
     width: "100%",
   },
   movieText: {
+    textAlign: "center",
     color: "#fff",
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     marginBottom: 5,
-    zIndex: 1,
+    zIndex: 10,
   },
   plusSign: {
     fontSize: 30,
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.28)', // semi-transparent dark
+    borderRadius: 10,
+    zIndex: 1,
   }
 });
