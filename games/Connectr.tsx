@@ -56,27 +56,26 @@ export default function Connectr() {
     const fourthMovieCredits = await getMovieCredits(fourthMovie.id);
     const endingMovieCredits = await getMovieCredits(endingMovie.id);
 
-    if (findMatchingCastMembers(startingMovieCredits.cast, secondMovieCredits.cast).length === 0) {
-      setGameResult("wrong");
-      return;
-    }
-
-    if (findMatchingCastMembers(secondMovieCredits.cast, thirdMovieCredits.cast).length === 0) {
-      setGameResult("wrong");
-      return;
-    }
-
-    if (findMatchingCastMembers(thirdMovieCredits.cast, fourthMovieCredits.cast).length === 0) {
-      setGameResult("wrong");
-      return;
-    }
-
-    if (findMatchingCastMembers(fourthMovieCredits.cast, endingMovieCredits.cast).length === 0) {
+    if ((findMatchingCastMembers(startingMovieCredits.cast, secondMovieCredits.cast).length === 0) ||
+      (findMatchingCastMembers(secondMovieCredits.cast, thirdMovieCredits.cast).length === 0) ||
+      (findMatchingCastMembers(thirdMovieCredits.cast, fourthMovieCredits.cast).length === 0) ||
+      (findMatchingCastMembers(fourthMovieCredits.cast, endingMovieCredits.cast).length === 0)) {
       setGameResult("wrong");
       return;
     }
 
     setGameResult("correct");
+  }
+
+  const handleWrong = () => {
+    setTimeout(() => {
+      setGameResult("");
+    }, 1000);
+    return (
+      <View style={styles.wrongContainer}>
+        <Text style={styles.wrong}>INCORRECT!</Text>
+      </View>
+    )
   }
 
   return (
@@ -121,7 +120,7 @@ export default function Connectr() {
         title="Submit"
       />
       {gameResult === "correct" && <Text>Correct!</Text>}
-      {gameResult === "wrong" && <Text>Wrong!</Text>}
+      {gameResult === "wrong" && handleWrong()}
 
     </View>
   );
@@ -130,7 +129,6 @@ export default function Connectr() {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    borderColor: "blue",
     borderWidth: 1,
     flex: 1,
     justifyContent: "space-between",
@@ -140,5 +138,17 @@ const styles = StyleSheet.create({
   movieTile: {
     width: "90%",
     height: "16%",
+  },
+  wrong: {
+    color: "red",
+    fontSize: 40,
+    fontWeight: 900,
+    zIndex: 10,
+  },
+  wrongContainer: {
+    alignSelf: "center",
+    top: "45%",
+    flex: 1,
+    position: "absolute",
   }
 });
