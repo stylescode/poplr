@@ -8,11 +8,11 @@ import { Sheet, YStack } from 'tamagui';
 
 export default function Connectr() {
 
-  const [startingMovie, setStartingMovie] = useState(null);
-  const [secondMovie, setSecondMovie] = useState(null);
-  const [thirdMovie, setThirdMovie] = useState(null);
-  const [fourthMovie, setFourthMovie] = useState(null);
-  const [endingMovie, setEndingMovie] = useState(null);
+  const [startingMovie, setStartingMovie] = useState<any>(null);
+  const [secondMovie, setSecondMovie] = useState<any>(null);
+  const [thirdMovie, setThirdMovie] = useState<any>(null);
+  const [fourthMovie, setFourthMovie] = useState<any>(null);
+  const [endingMovie, setEndingMovie] = useState<any>(null);
 
   const [activeMovie, setActiveMovie] = useState<number>(0);
   const [searching, setSearching] = useState(false);
@@ -129,7 +129,6 @@ export default function Connectr() {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    borderWidth: 1,
     flex: 1,
     justifyContent: "space-between",
     paddingTop: 20,
