@@ -14,7 +14,8 @@ export default {
       backgroundColor: "#ffffff"
     },
     ios: {
-      supportsTablet: true
+      supportsTablet: true,
+      bundleIdentifier: "com.poplr.app",
     },
     android: {
       adaptiveIcon: {
