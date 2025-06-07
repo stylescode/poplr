@@ -1,14 +1,16 @@
-import { Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import FourSquare from '@/games/FourSquare';
 
 export default function GameScreen() {
   return (
     <View>
-      <Text>
-        game two screen here
-        <TextInput
-          placeholder="Search"
-        />
-      </Text>
+      <FourSquare />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
