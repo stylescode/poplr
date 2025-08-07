@@ -1,14 +1,55 @@
-import { Text, TextInput, View } from 'react-native';
+import { Image, Text, TextInput, View, ScrollView, StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
+import MovieSearcher from '@/components/MovieSearcher';
 
 export default function HeadToHead() {
   const [gameState, setGameState] = useState(null);
+  const [movies, setMovies] = useState([]);
+
+  const verifyMovie = (movie) => {
+    if (movies.includes(movie)) {
+      console.log('Movie already selected:', movie);
+      return;
+    }
+    setMovies([...movies, movie]);
+    console.log('Movie verified:', movie);
+  }
+
+  const addMovie = (movie) => {
+    console.log('Movie added:', movie);
+  }
 
 
   return (
-    <View>
-      <Text>Head to Head Game</Text>
-      <TextInput placeholder="Enter your move" />
+    <View style={styles.container}>
+      <Text>Head to Head</Text>
+      <Text>Selected Movies:</Text>
+      <View
+        style={styles.selectedMoviesContainer}
+      >
+      {movies.map((movie) => (
+        <ScrollView
+          key={movie.id}
+        >
+          <Image
+            source={{ uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}` }}
+            style={{ width: 160, height: 240 }}
+          />
+          <Text key={movie.id}>{movie.title}</Text>
+        </ScrollView>
+      ))}
+      </View>
+      <MovieSearcher movieReceiverFunc={verifyMovie} />
+      {/* Additional game logic and components can be added here */}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    maxHeight: '100%',
+  },
+  selectedMoviesContainer: {
+    flexDirection: 'row',
+  }
+});
