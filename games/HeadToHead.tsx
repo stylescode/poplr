@@ -24,30 +24,28 @@ export default function HeadToHead() {
     <View style={styles.container}>
       <Text>Head to Head</Text>
       <Text>Selected Movies:</Text>
-      <View
-        style={styles.selectedMoviesContainer}
+      <ScrollView
+        contentContainerStyle={styles.selectedMoviesContainer}
+        horizontal
       >
-      {movies.map((movie) => (
-        <ScrollView
-          key={movie.id}
-        >
-          <Image
-            source={{ uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}` }}
-            style={{ width: 160, height: 240 }}
-          />
-          <Text key={movie.id}>{movie.title}</Text>
-        </ScrollView>
-      ))}
-      </View>
+        {movies && movies.map((movie) => (
+          <View key={movie.id}>
+            <Image
+              source={{ uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}` }}
+              style={{ width: 160, height: 240 }}
+            />
+            <Text key={movie.id}>{movie.title}</Text>
+          </View>
+        ))}
+      </ScrollView>
       <MovieSearcher movieReceiverFunc={verifyMovie} />
-      {/* Additional game logic and components can be added here */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    maxHeight: '100%',
+
   },
   selectedMoviesContainer: {
     flexDirection: 'row',
