@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Image, Pressable, Text, View, StyleSheet, TextInput } from "react-native";
-import { ScrollView } from "tamagui";
+import { Image, Pressable, Text, View, ScrollView, StyleSheet, TextInput } from "react-native";
 import { getMovies } from '@/api/tmdbApi';
 
 interface MovieSearchProps {
