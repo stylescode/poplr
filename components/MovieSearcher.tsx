@@ -25,7 +25,7 @@ export default function MovieSearcher({ movieReceiverFunc }: MovieSearchProps) {
         onChangeText={(text) => {
           setSearchQuery(text);
           getMovies(text).then((movies) => {
-            setMovieResults(movies.results);
+            setMovieResults(Array.isArray(movies.results) ? movies.results : []);
           });
         }}
         style={styles.input}
